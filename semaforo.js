@@ -44,6 +44,8 @@ function mudarAutomatico(){
     else if(semaforoVerde()){
         ligarSemaforoVermelho();
     }
+    else
+        ligarSemaforoVermelho();
 }
 
 
