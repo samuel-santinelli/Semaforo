@@ -1,60 +1,74 @@
-"use scrict"
-const semaforo = document.getElementById("semaforo")
-let idInterval
+"use strict"
+const semaforo= document.getElementById("semaforo");
+let idInterval;
 
-function semaforoInteiro(){
-    return !semaforo.scr.includes("semaforo")
+
+
+function ligarSemaforoVermelho(evento){
+    semaforo.src ="img/vermelho.png";
+    if (evento)parar()
+}
+function ligarSemaforoAmarelo(evento){
+    semaforo.src ="img/amarelo.png";
+   
+    if (evento)parar()
 }
 
-function botoesLigaDesliga(estadoLiga, estadoDesliga){
-    const ligar = document.getElementById("ligar")
-    const desligar = document.getElementById("desligar")
-    ligar.disabled = estadoLiga
-    desligar.disabled = estadoDesliga
+function ligarSemaforoVerde(evento){
+    semaforo.src ="img/verde.png";
+    if (evento)parar()
 }
-
-
-function ligarVermelho(evento){
-         
-            semaforo.src="img/vermelho.png" 
-            if(evento) pararPiscar()  
-        }
-        
-    
-
-
-function ligarAmarelo(evento){
-
-        semaforo.src="img/amarelo.png"
-        botoesLigaDesliga(false, true)
+function semaforoVermelho(){
+    return semaforo.src.includes ("vermelho");
    
 }
-    function ligarVerde(evento){
+function semaforoAmarelo(){
+    return semaforo.src.includes("amarelo");
+   
+}
+function semaforoVerde(){
+    return semaforo.src.includes("verde");
+   
+}
 
-        semaforo.src="img/verde.png"
 
+function mudarAutomatico(){
+    if(semaforoVermelho()){
+        ligarSemaforoAmarelo();
+        
     }
-
-    function pararSemaforo(){
-        clearInterval(idInterval)
-    }   
-
-
-    function trocarSemaforo(){
-        pararTrocar()
-        const idInterval = setInterval (trocaImagem, 1000)
+    else if(semaforoAmarelo()){
+        ligarSemaforoVerde();
+      
     }
+    else if(semaforoVerde()){
+        ligarSemaforoVermelho();
+    }
+}
 
 
-// Barra de Eventos
+
+function trocarAutomatico(){
+    parar()
+    idInterval = setInterval(mudarAutomatico,1000);
+   
+}
+function parar(){
+    clearInterval(idInterval)
+}
+
+
+
+
+
+
+//eventos
+
     document.getElementById("vermelho")
-    .addEventListener ("click", ligarVermelho)
-
+    .addEventListener('click',ligarSemaforoVermelho);
     document.getElementById("amarelo")
-    .addEventListener ("click", ligarAmarelo)
-
+    .addEventListener('click',ligarSemaforoAmarelo);
     document.getElementById("verde")
-    .addEventListener ("click", ligarVerde)
-
-    document.getElementById("trocar")
-    .addEventListener("click", trocarSemaforo)
+    .addEventListener('click',ligarSemaforoVerde);
+    document.getElementById("automatico")
+    .addEventListener('click', trocarAutomatico);
