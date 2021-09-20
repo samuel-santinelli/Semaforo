@@ -1,5 +1,5 @@
 "use strict"
-const semaforo= document.getElementById("semaforo");
+const semaforo = document.getElementById("semaforo");
 let idInterval;
 
 
